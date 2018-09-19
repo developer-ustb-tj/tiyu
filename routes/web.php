@@ -14,4 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::any('/a', 'ValidatationController@getnonce');
+
+Route::get('/verify', 'WeixinController@verify');
