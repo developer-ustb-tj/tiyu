@@ -18,8 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::any('/a', 'Admin\UploadController@a');
-
+Route::any('/a','Admin\UploadController@a');
+Route::any('/b','ValidatationController@getnonce');
 
 Route::get('/verify', 'WeixinController@verify');
 
