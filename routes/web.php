@@ -24,10 +24,5 @@ Route::any('/write', 'Admin\UploadController@write');
 Route::get('/download', 'Admin\DownloadController@download');
 Route::get('/verify', 'WeixinController@verify');
 
-<<<<<<< HEAD
-Route::any('/wechat', 'WeChatController@serve');
-=======
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
->>>>>>> feature-login
+Route::any('/wechat', 'WeChatController@serve');
