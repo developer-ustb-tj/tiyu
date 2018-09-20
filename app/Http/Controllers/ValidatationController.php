@@ -11,7 +11,7 @@ class ValidatationController extends Controller
         return view('welcome');
     }
 
-    public function getnonce(Request $request){
+    public function getonce(Request $request){
 
         $echostr=$request->input("echostr");//ok
         $msg=GetNumber::where('student_number','=',$echostr)->firstOrFail()->toArray();
