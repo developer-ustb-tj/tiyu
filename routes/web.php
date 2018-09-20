@@ -22,3 +22,5 @@ Route::any('/a', 'Admin\UploadController@a');
 Route::any('/write', 'Admin\UploadController@write');
 Route::get('/download', 'Admin\DownloadController@download');
 Route::get('/verify', 'WeixinController@verify');
+
+Route::any('/wechat', 'WeChatController@serve');
