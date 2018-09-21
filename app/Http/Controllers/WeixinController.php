@@ -4,12 +4,6 @@ use EasyWeChat\Factory;
 use Log;
 
 class WeixinController extends Controller {
-    public function verify() {
-        $app = app('wechat.official_account');
-        $response = $app->server->serve();
-        
-        return $response;
-    }
 
     public function serve()
     {
