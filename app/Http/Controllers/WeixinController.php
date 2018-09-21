@@ -1,4 +1,5 @@
 <?php
+namespace App\Http\Controllers;
 use EasyWeChat\Factory;
 use Log;
 
