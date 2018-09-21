@@ -22,4 +22,4 @@ Route::any('/a', 'Admin\UploadController@a');
 Route::any('/b','ValidatationController@getonce');
 Route::any('/write', 'Admin\UploadController@write');
 Route::get('/download', 'Admin\DownloadController@download');
-Route::any('/weixin', 'WeixinController@serve');
+Route::any('/api/weixin', 'WeixinController@serve');
