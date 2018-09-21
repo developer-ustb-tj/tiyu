@@ -19,6 +19,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/upload', 'Admin\UploadController@upload');
 Route::any('/a', 'Admin\UploadController@a');
+Route::any('/b','ValidatationController@getonce');
 Route::any('/write', 'Admin\UploadController@write');
 Route::get('/download', 'Admin\DownloadController@download');
 Route::get('/verify', 'WeixinController@verify');
+
+
+Route::any('/wechat', 'WeChatController@serve');

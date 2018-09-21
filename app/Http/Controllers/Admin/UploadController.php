@@ -6,16 +6,24 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Auth;
 class UploadController extends Controller
 {
     public function upload()
     {
+        if (!Auth::check()){
+            return view('auth.login');
+        }
         return view('upload');
     }
 
 
     public function a(Request $request)//导入的时候  上传文件
-    {   DB::delete('delete from score');
+    {
+        if (!Auth::check()){
+            return view('auth.login');
+        }
+        DB::delete('delete from score');
         if (!$request->hasFile('table')) {
             return [
             'success' => false,
@@ -47,7 +55,10 @@ class UploadController extends Controller
 
 
     public function write($filename)
-    {   
+    {
+        if (!Auth::check()){
+            return view('auth.login');
+        }
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('../storage/app/public/excel/'.$filename);//读取文件
         $content = $spreadsheet->getActiveSheet()->rangeToArray('A1:C100',NULL,TRUE,TRUE,TRUE);  //取出Excel内容
         for($i=2;;){
