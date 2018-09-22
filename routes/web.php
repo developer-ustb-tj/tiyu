@@ -24,3 +24,4 @@ Route::any('/write', 'Admin\UploadController@write');
 Route::get('/download', 'Admin\DownloadController@download');
 // 微信的 api 路由，添加 csrf exception
 Route::any('/api/weixin', 'WeixinController@serve');
+Route::get('/api/log', 'Admin\LogController@list');
