@@ -85,12 +85,12 @@ export default {
         { key: 'time', label: '时间', sortable: true, sortDirection:'desc'},
       ],
       currentPage: 1,
-      perPage: 5,
+      perPage: 10,
       totalRows: items.length,
       pageOptions: [ 5, 10, 15 ],
-      sortBy: null,
-      sortDesc: false,
-      sortDirection: 'asc',
+      sortBy: 'time',
+      sortDesc: true,
+      sortDirection: 'desc',
       filter: null,
       modalInfo: { title: '', content: '' }
     }
