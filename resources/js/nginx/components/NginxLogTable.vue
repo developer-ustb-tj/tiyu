@@ -83,7 +83,6 @@ export default {
         { key: 'host', label: 'host', sortable:true },
         { key: 'request', label: '请求', sortable:true },
         { key: 'time', label: '时间', sortable: true, sortDirection:'desc'},
-        { key: 'isActive', label: 'isActive'}
       ],
       currentPage: 1,
       perPage: 5,
