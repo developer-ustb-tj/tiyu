@@ -56,8 +56,7 @@
              :sort-direction="sortDirection"
              @filtered="onFiltered"
     >
-      <template slot="name" slot-scope="row">{{row.value.first}} {{row.value.last}}</template>
-      <template slot="isActive" slot-scope="row">{{row.value?'Yes :)':'No :('}}</template>
+      <template slot="request" slot-scope="row"><b-btn size="sm" :variant="row.value.split(' ')[0]=='GET'?'primary':'danger'" >{{ row.value.split(" ")[0] }}</b-btn> <b-btn size="sm">{{ row.value.split(" ")[1] }}</b-btn> <b-btn size="sm">{{ row.value.split(" ")[2] }}</b-btn>  </template>
     </b-table>
 
     <b-row>
@@ -81,8 +80,10 @@ export default {
     return {
       items: items,
       fields: [
-        { key: 'host', label: 'host' },
-        { key: 'request', label: '请求' }
+        { key: 'host', label: 'host', sortable:true },
+        { key: 'request', label: '请求', sortable:true },
+        { key: 'time', label: '时间', sortable: true, sortDirection:'desc'},
+        { key: 'isActive', label: 'isActive'}
       ],
       currentPage: 1,
       perPage: 5,

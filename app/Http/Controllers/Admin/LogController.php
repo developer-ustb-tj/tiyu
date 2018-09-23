@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-
+use DateTime;
 class LogController extends Controller
 {
     public function list(){
@@ -14,6 +14,7 @@ class LogController extends Controller
         $parser->setFormat('%h %l %u %t "%r" %>s %O "%{Referer}i" \"%{User-Agent}i"');
         foreach ($lines as $line) {
             $entry = $parser->parse($line);
+            $entry->time = DateTime::createFromFormat('d/M/Y:H:i:s P',$entry->time)->format('Y-m-d H:i:s');
             $collection->push($entry);
         }
         return $collection;
