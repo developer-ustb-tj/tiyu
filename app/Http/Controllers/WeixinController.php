@@ -17,7 +17,7 @@ class WeixinController extends Controller {
                     break;
                 case 'text':
                     $content = $message['Content'];
-                    return $this->processText();
+                    return $this->processText($content);
                     break;
                 default:
                     return '感谢关注';
