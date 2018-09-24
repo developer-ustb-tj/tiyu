@@ -50,8 +50,8 @@ class WeixinController extends Controller {
         if($text == "第几周") {
             return "第".\DB::table('date_conversion')->select('week')->where('date',\Carbon\Carbon::now()->toDateString())->first()->week.'周';
         }
-        if($dateList->contains($content)){
-            return $mediaId[$content]();
+        if($dateList->contains($message)){
+            return $mediaId[$message]();
         }
         return '感谢关注';
     }
