@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Log;
+use EasyWeChat\Kernel\Messages\Image;
 
 class WeixinController extends Controller {
 
@@ -10,7 +11,14 @@ class WeixinController extends Controller {
 
         $app = app('wechat.official_account');
         $app->server->push(function($message){
-            return "欢迎关注 overtrue！";
+            switch($message['MsgType']) {
+                case 'image':
+                    return new Image('8aF4R8nSXuF3o7jaU15DZvmclJFQhF5mD7hSJSe2fzXAIpNFAt4WgavOE_qb30PL');
+                    break;
+                default:
+                    return '感谢关注';
+                    break;
+            }
         });
 
         return $app->server->serve();
