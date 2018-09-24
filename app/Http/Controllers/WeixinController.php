@@ -37,6 +37,10 @@ class WeixinController extends Controller {
             '礼拜五' => function(){return new Image('cwU5NYovMK--_21pXYOhiVvuY0sH8YBF5kSNu5VE12O6AS9vZ93U2UDInolgfFbi');},
             '礼拜六' => function(){return '没课';},
             '礼拜天' => function(){return '没课';},
+            '第几周' => function(){return "第".\DB::table('date_conversion')->select('week')->where('date',\Carbon\Carbon::now()->toDateString())->first()->week.'周'; },
+            '今天' => function() {
+                return \Carbon\Carbon::now()->toDateString();
+            }
         ]);
         $dateList = collect([
             '礼拜一',
@@ -46,10 +50,9 @@ class WeixinController extends Controller {
             '礼拜五',
             '礼拜六',
             '礼拜天',
+            '第几周',
+            '今天'
         ]);
-        if($text == "第几周") {
-            return "第".\DB::table('date_conversion')->select('week')->where('date',\Carbon\Carbon::now()->toDateString())->first()->week.'周';
-        }
         if($dateList->contains($text)){
             return $mediaId[$text]();
         }
