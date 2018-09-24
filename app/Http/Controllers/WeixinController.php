@@ -41,7 +41,7 @@ class WeixinController extends Controller {
             '今天' => function() {
                 $date = \Carbon\Carbon::now()->toDayDateTimeString();
                 $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
-                $client = new GuzzleHttp\Client();
+                $client = new \GuzzleHttp\Client();
                 $query = [
                     'key' => config('services.weather.key'),
                     'city' => '天津',
@@ -50,7 +50,6 @@ class WeixinController extends Controller {
                 $response = $client->get($url, ['query' => $query])->getBody()->getContents();
                 $response = json_decode($response)->lives[0];
                 $result = "$date\n$response->weather $response->temperature 摄氏度";
-                Log::info($result);
                 return $result;
             }
         ]);
