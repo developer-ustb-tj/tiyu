@@ -58,12 +58,12 @@ class WeixinController extends Controller {
                 $course = $this->course($day, $week);
                 $number = $course->count();
                 $courseString="";
-                $course->each(function($item, $key) {
+                foreach($course as $item) {
                     $alley = $item->alley;
                     $room = $item->room;
                     $name = $item->name;
                     $courseString=$courseString."$name\n$alley 教 $room\n";
-                });
+                }
                 // 组装
                 $result = "$date\n$response->weather $response->temperature 摄氏度\n你今天有 $number 节课\n";
                 return $result;
