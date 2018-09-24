@@ -39,7 +39,12 @@ class WeixinController extends Controller {
             '礼拜天' => function(){return '没课';},
             '第几周' => function(){return "第".\DB::table('date_conversion')->select('week')->where('date',\Carbon\Carbon::now()->toDateString())->first()->week.'周'; },
             '今天' => function() {
-                $date = \Carbon\Carbon::now()->toDayDateTimeString();
+                // 日期
+                $now = \Carbon\Carbon::now();
+                $date = $now->toDayDateTimeString();
+                $day = $now->dayOfWeek;
+                $week = \DB::table('date_conversion')->select('week')->where('date',\Carbon\Carbon::now()->toDateString())->first()->week;
+                // 天气
                 $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
                 $client = new \GuzzleHttp\Client();
                 $query = [
@@ -49,7 +54,18 @@ class WeixinController extends Controller {
                 ];
                 $response = $client->get($url, ['query' => $query])->getBody()->getContents();
                 $response = json_decode($response)->lives[0];
-                $result = "$date\n$response->weather $response->temperature 摄氏度";
+                // 课程
+                $course = $this->course($day, $week);
+                $number = $course->count();
+                $courseString="";
+                $course->each(function($item, $key) {
+                    $alley = $item->alley;
+                    $room = $item->room;
+                    $name = $item->name;
+                    $courseString=$courseString."$name\n$alley 教 $room\n";
+                });
+                // 组装
+                $result = "$date\n$response->weather $response->temperature 摄氏度\n你今天有 $number 节课\n";
                 return $result;
             }
         ]);
@@ -68,5 +84,14 @@ class WeixinController extends Controller {
             return $mediaId[$text]();
         }
         return '感谢关注';
+    }
+
+    private function course($day, $week) {
+        $course=collect();
+        return \DB::table('course')->where('day',$day)->get()->filter(function($value, $key) use ($week) {
+            $turn = preg_split("/,/",$value->turn);
+            $turn = collect($turn);
+            return $turn->contains($week);
+        });
     }
 }
