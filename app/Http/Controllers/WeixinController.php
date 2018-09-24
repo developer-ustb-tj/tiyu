@@ -39,7 +39,18 @@ class WeixinController extends Controller {
             '礼拜天' => function(){return '没课';},
             '第几周' => function(){return "第".\DB::table('date_conversion')->select('week')->where('date',\Carbon\Carbon::now()->toDateString())->first()->week.'周'; },
             '今天' => function() {
-                return \Carbon\Carbon::now()->toDateString();
+                $date = \Carbon\Carbon::now()->toDayDateTimeString();
+                $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
+                $client = new GuzzleHttp\Client();
+                $query = [
+                    'key' => config('services.weather.key'),
+                    'city' => '天津',
+                    'output' => 'json'
+                ];
+                $response = $client->get($url, ['query' => $query])->getBody()->getContents();
+                $response = json_decode($response)->lives[0];
+                $result = "$date\n$response->weather $response->temperature 摄氏度";
+                return $result;
             }
         ]);
         $dateList = collect([
