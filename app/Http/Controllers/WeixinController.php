@@ -65,7 +65,7 @@ class WeixinController extends Controller {
                     $courseString=$courseString."$name\n$alley 教 $room\n";
                 }
                 // 组装
-                $result = "$date\n$response->weather $response->temperature 摄氏度\n你今天有 $number 节课\n";
+                $result = "$date\n$response->weather $response->temperature 摄氏度\n你今天有 $number 节课\n$courseString";
                 return $result;
             }
         ]);
