@@ -50,6 +50,7 @@ class WeixinController extends Controller {
                 $response = $client->get($url, ['query' => $query])->getBody()->getContents();
                 $response = json_decode($response)->lives[0];
                 $result = "$date\n$response->weather $response->temperature 摄氏度";
+                Log::info($result);
                 return $result;
             }
         ]);
