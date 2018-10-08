@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 use App\Template;
+use EasyWeChat;
 
 class UpdateTemplateList implements ShouldQueue
 {
@@ -31,10 +32,22 @@ class UpdateTemplateList implements ShouldQueue
      */
     public function handle()
     {
-        $app = app('wechat.official_account');
-        $list = $app->template_message->getPrivateTemplates()['template_list'];
         \DB::table('templates')->delete();
-        $i=1;
+        $accounts=['default'];
+        foreach($accounts as $account){
+            $list = $this->getTemplateList('default');
+            $this->storeTemplateList($list);
+        }
+        
+    }
+
+    protected function getTemplateList($name){
+        $app=\EasyWeChat::officialAccount($name);
+        $list = $app->template_message->getPrivateTemplates()['template_list'];
+        return $list;
+    }
+
+    protected function storeTemplateList($list){
         foreach($list as $template){    
             $content = $template['content'];
             $id = $template['template_id'];
@@ -45,11 +58,19 @@ class UpdateTemplateList implements ShouldQueue
                 $args = $args." ".$result;
             }
             $record = new Template;
-            $record->id=$i;
-            $i++;
+            $record->id=$this->hashTemplateId($id);
             $record->template_id=$id;
             $record->arguments=trim($args);
             $record->save();
         }
+    }
+    
+    protected function hashTemplateId($template_id){
+        $result = 0;
+        $length = strlen($template_id);
+        for($i=0;$i<43;$i++){
+            $result+=ord($template_id[$i]);
+        }
+        return $result;
     }
 }
