@@ -15,9 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('nginx',function(){
-    return view('nginx/list');
-});
+// TODO: nginx 日志解析需要改写为后端分页的形式
+// Route::get('nginx',function(){
+//     return view('nginx/list');
+// });
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -34,5 +35,5 @@ Route::namespace('API')->prefix('api')->group(function(){
     Route::post('/template','TemplateController@store');   
     Route::get('/template/test/{name}','AccessTokenController@test');
     Route::any('/weixin', 'WeixinController@serve');
-    Route::get('/log', 'LogController@list');
+    // Route::get('/log', 'LogController@list');
 });
