@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Template;
 
 class Kernel extends ConsoleKernel
 {
@@ -26,6 +27,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        // 每分钟更新一次 template 列表
+        $schedule->job(new \App\Jobs\UpdateTemplateList)->everyFiveMinutes();
+        \Log::info("crontab working");
     }
 
     /**

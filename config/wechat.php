@@ -75,6 +75,12 @@ return [
             //     'callback' => env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', '/examples/oauth_callback.php'),
             // ],
         ],
+        'smart' => [
+            'app_id' => env('SMART_OFFICIAL_ACCOUNT_APPID'),
+            'secret' => env('SMART_OFFICIAL_ACCOUNT_SECRET'),
+            'token' => env('SMART_OFFICIAL_ACCOUNT_TOKEN'),
+            'aes_key' => env('SMART_OFFICIAL_ACCOUNT_AES_KEY','')
+        ],
     ],
 
     /*

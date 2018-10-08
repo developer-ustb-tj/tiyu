@@ -1,7 +1,8 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 use Log;
 use EasyWeChat\Kernel\Messages\Image;
+use App\Http\Controllers\Controller;
 
 class WeixinController extends Controller {
 
