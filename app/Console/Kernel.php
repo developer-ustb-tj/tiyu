@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         // 每分钟更新一次 template 列表
         $schedule->job(new \App\Jobs\UpdateTemplateList)->everyFiveMinutes();
+        \Log::info("crontab working");
     }
 
     /**
