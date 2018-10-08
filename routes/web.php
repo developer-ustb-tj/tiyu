@@ -83,3 +83,6 @@ Route::get('/setDate', function() {
     return $week;
     
 });
+
+Route::get('/api/access_token','API\AccessTokenController@index');
+Route::post('/api/template','API\TemplateController@store');
