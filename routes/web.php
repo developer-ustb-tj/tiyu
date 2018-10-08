@@ -29,7 +29,7 @@ Route::get('nginx',function(){
 
 /* API 路由 */
 
-Route::namespace('API')->prefix('api')->middleware('api')->group(function(){
+Route::namespace('API')->prefix('api')->group(function(){
     Route::get('/account/{name}/access_token','AccessTokenController@index');
     Route::post('/template','TemplateController@store');   
     Route::get('/template/test/{name}','AccessTokenController@test');
