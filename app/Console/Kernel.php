@@ -28,7 +28,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         // 每分钟更新一次 template 列表
-        $schedule->job(new \App\Jobs\UpdateTemplateList)->everyFiveMinutes();
+        // 每 5 分钟更新一次很容易撞到频率限制
+        // $schedule->job(new \App\Jobs\UpdateTemplateList)->everyFiveMinutes();
         \Log::info("crontab working");
     }
 
