@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <nginx-log-table></nginx-log-table>
+                    
                 </div>
             </div>
         </div>
