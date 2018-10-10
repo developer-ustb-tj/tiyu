@@ -16,3 +16,4 @@ yarn-error.log
 app/Http/Controllers/HomeController.php
 /public/js/*
 /public/css/*
+/public/mix-manifest.json
