@@ -1,31 +1,22 @@
-
-@extends('nginx.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">{{ __('Upload') }}</div>
-                <div class="form-group row">
-                    <div class="col-md-6 offset-md-4">
-                        <span class="navbar-brand" onclick="downloadExcel()">上传之前务必点此<a href="/download">下载示例文档</a></span>
-                    </div>
-                    <div class="col-md-6 offset-md-3">
-                        <form  method="POST" action="/a" enctype="multipart/form-data">
-                        {{ csrf_field() }}        
-					    <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="table" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                <div class="col-md-6 offset-md-5 card-body">
-                                <button type="submit" class="btn btn-primary">{{ __('上传') }}</button>
-                                </div>
-                        </div>
-                        </form>
-                </div>
-            </div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>上传成绩</title>
+</head>
+<body>
+<div class="links">
+<div class="add_box">
+            <span  onclick="downloadExcel()">上传之前务必点此<a href="/download">下载示例文档</a></span>
         </div>
+    <form  method="POST" action="/a" enctype="multipart/form-data">
+        {{ csrf_field() }}           
+        <label for="table">请选择excle文件</label>
+        <input type="file" name="table" required>    
+        <button type="submit">提交</button>
+    </form>
     </div>
-</div>
-
-@endsection
+</body>
+</html>
