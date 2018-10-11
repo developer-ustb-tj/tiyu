@@ -25,17 +25,21 @@ class UploadController extends Controller
         }
         DB::delete('delete from score');
         if (!$request->hasFile('table')) {
-            return [
-            'success' => false,
-            'message' => '上传文件为空'
-            ];
+            echo "<script>alert('上传失败！请重新上传！')</script>";
+            return view('upload');
+            // return [
+            // 'success' => false,
+            // 'message' => '上传文件为空'
+            // ];
         }
         $file = $request->file('table');
         if (!$file->isValid()) {
-        return [
-            'success' => false,
-            'message' => '文件上传出错'
-            ];
+            echo "<script>alert('上传失败！请重新上传！')</script>";
+            return view('upload');
+        // return [
+        //     'success' => false,
+        //     'message' => '文件上传出错'
+        //     ];
         }
         $extension = $file->getClientOriginalExtension();//获取文件后缀名
         $storage_path = storage_path('app/public/excel');//上传文件保存的路径
@@ -44,16 +48,19 @@ class UploadController extends Controller
         }
         $filename = md5(ceil(microtime(true) * 1000)).'.' . $extension;
         if ($file->move($storage_path, $filename) == false) {//移动一个已上传的文件
-            echo '上传失败！';
+            echo "<script>alert('上传失败！请重新上传！')</script>";
+            return view('upload');
         }else{
             $write = $this->write($filename);
-            echo '上传成功！';
+            echo "<script>alert('上传成功！')</script>";
             return view('upload');
         }
     }
 
 
-
+    /**
+     * @param string $filename
+     */
     public function write($filename)
     {
         if (!Auth::check()){
