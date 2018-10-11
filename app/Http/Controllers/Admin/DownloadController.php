@@ -13,7 +13,7 @@ class DownloadController extends Controller
         if (!Auth::check()){
             return view('auth.login');
         }
-        return response()->download(storage_path('slwd/slwd.xlsx'));
+        return response()->download(storage_path('app/public/slwd.xlsx'));
         
     }
 }
