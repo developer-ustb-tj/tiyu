@@ -29,7 +29,6 @@ class GenerateIssuesQRCode implements ShouldQueue
      */
     public function handle()
     {
-        $data = 'https://www.youtube.com/watch?v=DLzxrzFCyOs&t=43s';
         for($i=8;$i<=10;$i++){
             for($j=1;$j<=4;$j++){
                 for($k=1;$k<=10;$k++){
