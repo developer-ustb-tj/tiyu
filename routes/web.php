@@ -28,6 +28,8 @@ Route::any('/b','ValidatationController@getonce');
 Route::any('/write', 'Admin\UploadController@write');
 Route::get('/download', 'Admin\DownloadController@download');
 
+// TODO: 删除无效的路由
+
 /* API 路由 */
 
 Route::namespace('API')->prefix('api')->group(function(){
