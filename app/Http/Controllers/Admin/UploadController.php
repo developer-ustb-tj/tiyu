@@ -71,5 +71,10 @@ class UploadController extends Controller
                 break;
             }
         }
+    /**
+     * TODO: 可以改为指向 CDN 
+     */
+    public function sample(){
+        return response()->download(storage_path('sample/slwd.xlsx'));
     }
 }
