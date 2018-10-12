@@ -39,5 +39,8 @@ Route::namespace('API')->prefix('api')->group(function(){
 });
 
 Route::namespace('Admin')->middleware('auth')->prefix('admin')->group(function(){
+    Route::get('/upload', 'UploadController@create');
+    Route::post('/upload', 'UploadController@store');
+    Route::get('/upload/success', 'UploadController@success');
     Route::get('/upload/sample','UploadController@sample');
 });
