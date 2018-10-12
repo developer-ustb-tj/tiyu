@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <form action="/admin/upload" method="POST" enctype="multipart/form-data">
                         @if($errors->any())
+                        {{-- TODO: 错误的中文化 --}}
                         @foreach($errors->all() as $error)
                             <div class="alert alert-danger" role="alert">
                                 {{ $error }}
