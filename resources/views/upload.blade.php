@@ -17,11 +17,13 @@
 					    <div class="custom-file">
                             <input type="file" class="custom-file-input" name="table" id="customFile">
                             <label class="custom-file-label" for="customFile">Choose file</label>
-                                <div class="col-md-6 offset-md-5 card-body">
-                                <button type="submit" class="btn btn-primary">{{ __('上传') }}</button>
-                                </div>
+                                
+                        </div>
+                        <div class="col-md-6 offset-md-5 card-body">
+                            <button type="submit" class="btn btn-primary">{{ __('上传') }}</button>
                         </div>
                         </form>
+                </div>
                 </div>
             </div>
         </div>
