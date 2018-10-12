@@ -27,7 +27,8 @@ Route::any('/a', 'Admin\UploadController@a');
 Route::any('/b','ValidatationController@getonce');
 Route::any('/write', 'Admin\UploadController@write');
 Route::get('/download', 'Admin\DownloadController@download');
-
+Route::get('/upload/success', 'Admin\UploadController@success');
+Route::get('/upload/error', 'Admin\UploadController@error');
 /* API 路由 */
 
 Route::namespace('API')->prefix('api')->group(function(){

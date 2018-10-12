@@ -6,6 +6,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Http\RedirectResponse;
 use Auth;
 class UploadController extends Controller
 {
@@ -25,21 +26,11 @@ class UploadController extends Controller
         }
         DB::delete('delete from score');
         if (!$request->hasFile('table')) {
-            echo "<script>alert('上传失败！请重新上传！')</script>";
-            return view('upload');
-            // return [
-            // 'success' => false,
-            // 'message' => '上传文件为空'
-            // ];
+            return redirect('upload/error');
         }
         $file = $request->file('table');
         if (!$file->isValid()) {
-            echo "<script>alert('上传失败！请重新上传！')</script>";
-            return view('upload');
-        // return [
-        //     'success' => false,
-        //     'message' => '文件上传出错'
-        //     ];
+            return redirect('upload/error');  //若出错弹出Js并返回/upload页
         }
         $extension = $file->getClientOriginalExtension();//获取文件后缀名
         $storage_path = storage_path('app/public/excel');//上传文件保存的路径
@@ -52,12 +43,20 @@ class UploadController extends Controller
             return view('upload');
         }else{
             $write = $this->write($filename);
-            echo "<script>alert('上传成功！')</script>";
-            return view('upload');
+            return redirect('upload/success');
         }
     }
 
-
+    public function success()
+    {
+        echo "<script>alert('上传成功！')</script>";
+        return view('upload');
+    }
+    public function error()
+    {
+        echo "<script>alert('上传失败！请重新上传！')</script>";
+        return view('upload');
+    }
     /**
      * @param string $filename
      */
