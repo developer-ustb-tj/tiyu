@@ -8,7 +8,7 @@
                 <div class="card-header">上传学生成绩</div>
 
                 <div class="card-body">
-                    <form novalidate  action="/admin/upload" method="POST" enctype="multipart/form-data">
+                    <form action="/admin/upload" method="POST" enctype="multipart/form-data">
                         @if($errors->any())
                         @foreach($errors->all() as $error)
                             <div class="alert alert-danger" role="alert">
