@@ -37,3 +37,10 @@ Route::namespace('API')->prefix('api')->group(function(){
     Route::any('/weixin', 'WeixinController@serve');
     // Route::get('/log', 'LogController@list');
 });
+
+Route::namespace('Admin')->middleware('auth')->prefix('admin')->group(function(){
+    Route::get('/upload', 'UploadController@create');
+    Route::post('/upload', 'UploadController@store');
+    Route::get('/upload/success', 'UploadController@success');
+    Route::get('/upload/sample','UploadController@sample');
+});
