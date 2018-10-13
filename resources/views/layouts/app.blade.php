@@ -11,6 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="{{ static_resource('js/manifest.js') }}"></script>
+    <script src="{{ static_resource('js/vendor.js') }}" defer></script>
     <script src="{{ static_resource('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
