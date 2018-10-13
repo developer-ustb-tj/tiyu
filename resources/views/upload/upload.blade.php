@@ -10,8 +10,7 @@
                 <div class="card-body">
                     <form action="/admin/upload" method="POST" enctype="multipart/form-data">
                         @if($errors->any())
-                        {{-- TODO: 错误的中文化 --}}
-                        {{-- 选中文件后，input 的文字修改为文件名 --}}
+                        {{-- TODO: 选中文件后，input 的文字修改为文件名 --}}
                         @foreach($errors->all() as $error)
                             <div class="alert alert-danger" role="alert">
                                 {{ $error }}
