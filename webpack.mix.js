@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,7 +10,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
 
-mix.js('resources/js/nginx/log.js','public/js/nginx');
+mix.setPublicPath('public');
+
+mix.js('resources/js/nginx/log.js', 'js/nginx');
+
+mix.js('resources/js/app.js', 'js');
+
+mix.sass('resources/sass/app.scss', 'css');
+
+mix.extract(['vue', 'bootstrap', 'axios', 'jquery', 'lodash'], 'js/vendor.js');

@@ -16,17 +16,13 @@ Route::get('/', function () {
 });
 
 // TODO: nginx 日志解析需要改写为后端分页的形式
+// TODO: nginx 日志 json api 更改为 json-api 格式
 // Route::get('nginx',function(){
 //     return view('nginx/list');
 // });
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/upload', 'Admin\UploadController@upload');
-Route::any('/a', 'Admin\UploadController@a');
-Route::any('/b','ValidatationController@getonce');
-Route::any('/write', 'Admin\UploadController@write');
-Route::get('/download', 'Admin\DownloadController@download');
 
 /* API 路由 */
 
