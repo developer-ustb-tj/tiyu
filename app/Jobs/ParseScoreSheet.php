@@ -44,27 +44,26 @@ class ParseScoreSheet implements ShouldQueue
      */
     public function handle()
     {
-        $reader = IOFactory::createReader('Xlsx');
-        $reader->setReadDataOnly(TRUE);
-        $sheet = $reader->load($this->path.$this->filename)->getActiveSheet();
-        $cells = $sheet->getCellCollection();
         $columns=collect([
             'student_id' => 'A',
             'student_name' => 'B',
             'student_score' => 'C'
         ]);
-        DB::table('score')->delete();
-        for($index=2; ;$index++){
-            if($cells->get('A'.$index)==NULL || $cells->get('A'.$index)->getValue()==NULL){
-                break;
-            }
-            $record = [];
-            foreach($columns as $key => $col){
-                $value = $cells->get($col.$index)->getValue();
-                $record[$key]=$value;
-            }
-            $record = new \App\Score($record);
-            $record->save();
+        $cells = IOFactory::createReader('Xlsx')
+            ->setReadDataOnly(TRUE)
+            ->load($this->path.$this->filename)
+            ->getActiveSheet()
+            ->getCellCollection();
+        $result = collect();
+        // 从第二行开始读，第一行是 column name
+        for($i=2; $cells->get('A'.$i)==NULL || $cells->get('A'.$i)->getValue()==NULL ;$i++){ 
+            $result->push($columns->map(function($item, $key) use (&$i, $cells){
+                return $cells->get($item.$i)->getValue();   
+            }));
         }
+        DB::transaction(function() use (&$result) {
+            DB::table('score')->delete();
+            DB::table('score')->insert($result->toArray());
+        });
     }
 }
