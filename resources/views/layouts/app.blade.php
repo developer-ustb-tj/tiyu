@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{{-- TODO: base 页面的中文化 --}}
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
