@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use DateTime;
 class LogController extends Controller
 {
+    /**
+     * TODO: 输出用 fractal 的 pagination 转换为 jsonapi 格式
+     */
     public function list(){
         $parser = new \Kassner\LogParser\LogParser();
         $lines=file(env('NGINX_LOG_PATH'),FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

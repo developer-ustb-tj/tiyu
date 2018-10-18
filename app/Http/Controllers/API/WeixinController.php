@@ -32,6 +32,9 @@ class WeixinController extends Controller {
         return $app->server->serve();
     }
 
+    /**
+     * TODO: 设一个定时任务，定时分配上传图片的队列任务
+     */
     private function processText($text) {
         $mediaId = collect([
             '礼拜一' => function(){return new Image('mcnrPviQh7M7W3MO-V4H4aNqupSYaXMrMQwXa2s0q1x2uwAEmfeujVPo8dKeLeL0');},
