@@ -4,6 +4,8 @@ use Log;
 use EasyWeChat\Kernel\Messages\Image;
 use App\Http\Controllers\Controller;
 
+use App\Score;
+
 class WeixinController extends Controller {
     
     /**
@@ -100,5 +102,12 @@ class WeixinController extends Controller {
             $turn = collect($turn);
             return $turn->contains($week);
         });
+    }
+
+    /**
+     * @param string $number 学生学号
+     */
+    protected function getScore($number){
+        return Score::where('student_id',$number)->first()->student_score;
     }
 }
