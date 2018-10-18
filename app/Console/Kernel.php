@@ -6,6 +6,8 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Template;
 
+use Illuminate\Support\Facades\Storage;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -31,6 +33,11 @@ class Kernel extends ConsoleKernel
         // 每 5 分钟更新一次很容易撞到频率限制
         // $schedule->job(new \App\Jobs\UpdateTemplateList)->everyFiveMinutes();
         // \Log::info("crontab working");
+
+        // $list = Storage::files('public/default_pictures');
+        // foreach($list as $item){
+        //     $schedule->job(new UploadPicture($item,'default'));
+        // }
     }
 
     /**
