@@ -4,6 +4,8 @@ use Log;
 use EasyWeChat\Kernel\Messages\Image;
 use App\Http\Controllers\Controller;
 
+use App\Score;
+
 class WeixinController extends Controller {
     
     /**
@@ -32,6 +34,9 @@ class WeixinController extends Controller {
         return $app->server->serve();
     }
 
+    /**
+     * TODO: 设一个定时任务，定时分配上传图片的队列任务
+     */
     private function processText($text) {
         $mediaId = collect([
             '礼拜一' => function(){return new Image('mcnrPviQh7M7W3MO-V4H4aNqupSYaXMrMQwXa2s0q1x2uwAEmfeujVPo8dKeLeL0');},
@@ -97,5 +102,12 @@ class WeixinController extends Controller {
             $turn = collect($turn);
             return $turn->contains($week);
         });
+    }
+
+    /**
+     * @param string $number 学生学号
+     */
+    protected function getScore($number){
+        return Score::where('student_id',$number)->first()->student_score;
     }
 }

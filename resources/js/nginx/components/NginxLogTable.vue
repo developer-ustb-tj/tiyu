@@ -104,6 +104,7 @@ export default {
     }
   },
   mounted(){
+    // TODO: 接收到的 json 以 json api 格式的 pagination 解析
     axios.get('/api/log')
       .then((response) => {
         this.items = response.data

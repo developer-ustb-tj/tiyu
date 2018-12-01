@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// TODO: api 路由修改为用 Dingo API 接管
+// TODO: API 版本由 header 接管
+// TODO: 新建一个项目，require laravel cors 配置跨域资源共享
+
 // TODO: nginx 日志解析需要改写为后端分页的形式
 // TODO: nginx 日志 json api 更改为 json-api 格式
 // Route::get('nginx',function(){

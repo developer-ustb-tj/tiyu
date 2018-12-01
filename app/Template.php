@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Template extends Model
 {
     public function getArgsAttribute(){
-        $arguments = trim($this->arguments);
-        $result = preg_split('/ /', $arguments);
+        $result = json_decode($this->arguments);
         return $result;
     }
 }
